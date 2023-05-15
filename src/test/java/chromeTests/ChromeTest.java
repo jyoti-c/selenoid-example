@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 /**
  * @author jyoti.chabria
  */
-public class SampleTest_Chrome2 {
+public class ChromeTest {
     WebDriver webDriver;
 
     @BeforeTest

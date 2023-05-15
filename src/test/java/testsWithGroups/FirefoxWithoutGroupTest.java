@@ -1,4 +1,4 @@
-package uiTests;
+package testsWithGroups;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 /**
  * @author jyoti.chabria
  */
-public class SampleTest_FF {
+public class FirefoxWithoutGroupTest {
     WebDriver webDriver;
 
     @BeforeTest

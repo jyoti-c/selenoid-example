@@ -1,9 +1,9 @@
-package testsWithGroups;
+package uiTests;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.SessionId;
 import org.testng.Assert;
@@ -14,12 +14,12 @@ import org.testng.annotations.Test;
 /**
  * @author jyoti.chabria
  */
-public class SampleTest_FF {
+public class ChromeUITest {
     WebDriver webDriver;
 
     @BeforeTest
     public void setUp() throws MalformedURLException {
-        FirefoxOptions options = new FirefoxOptions();
+        ChromeOptions options = new ChromeOptions();
         options.setCapability("enableVNC",true);
         options.setCapability("enableVideo",true);
         webDriver=new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
@@ -28,7 +28,7 @@ public class SampleTest_FF {
     }
 
     @Test
-    public void testUIFirefox() {
+    public void testUIChrome() {
         try {
             SessionId s = ((RemoteWebDriver) webDriver).getSessionId();
             System.out.println("Session Id is: " + s);
@@ -52,5 +52,4 @@ public class SampleTest_FF {
     public void tearDown() {
         webDriver.quit();
     }
-
 }
