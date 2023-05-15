@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 public class ChromeUITest {
     WebDriver webDriver;
 
-    @BeforeTest
+    @BeforeTest(alwaysRun = true)
     public void setUp() throws MalformedURLException {
         ChromeOptions options = new ChromeOptions();
         options.setCapability("enableVNC",true);
@@ -27,7 +27,7 @@ public class ChromeUITest {
 
     }
 
-    @Test
+    @Test(groups = {"chrome"})
     public void testUIChrome() {
         try {
             SessionId s = ((RemoteWebDriver) webDriver).getSessionId();

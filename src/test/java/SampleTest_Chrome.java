@@ -17,7 +17,7 @@ public class SampleTest_Chrome {
 
     WebDriver webDriver;
 
-    @BeforeTest
+    @BeforeTest(alwaysRun = true)
     public void setUp() throws MalformedURLException {
         ChromeOptions options = new ChromeOptions();
         options.setCapability("enableVNC",true);
@@ -27,7 +27,7 @@ public class SampleTest_Chrome {
 
     }
 
-    @Test
+    @Test(groups = {"chrome"})
     public void test001() {
         try {
             SessionId s = ((RemoteWebDriver) webDriver).getSessionId();
