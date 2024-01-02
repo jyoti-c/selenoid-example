@@ -1,31 +1,15 @@
 package testsWithGroups;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.SessionId;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import utils.ChromeTestBase;
 
 /**
  * @author jyoti.chabria
  */
-public class ChromeTestWithGroup {
-    WebDriver webDriver;
-
-    @BeforeTest(alwaysRun = true)
-    public void setUp() throws MalformedURLException {
-        ChromeOptions options = new ChromeOptions();
-        options.setCapability("enableVNC",true);
-        options.setCapability("enableVideo",true);
-        webDriver=new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
-
-
-    }
+public class ChromeTestWithGroup extends ChromeTestBase {
 
     @Test(groups = {"chrome"})
     public void testUIChrome() {
@@ -41,15 +25,10 @@ public class ChromeTestWithGroup {
             webDriver.navigate().to("https://www.facebook.com");
             Assert.assertNotEquals(webDriver.getTitle(), "Meta", "Title does not match");
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             Assert.fail();
         }
 
-    }
-    @AfterTest(alwaysRun = true)
-    public void tearDown() {
-        webDriver.quit();
     }
 }

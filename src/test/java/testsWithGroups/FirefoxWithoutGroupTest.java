@@ -1,31 +1,15 @@
 package testsWithGroups;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.SessionId;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import utils.FirefoxTestBase;
 
 /**
  * @author jyoti.chabria
  */
-public class FirefoxWithoutGroupTest {
-    WebDriver webDriver;
-
-    @BeforeTest
-    public void setUp() throws MalformedURLException {
-        FirefoxOptions options = new FirefoxOptions();
-        options.setCapability("enableVNC",true);
-        options.setCapability("enableVideo",true);
-        webDriver=new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
-
-
-    }
+public class FirefoxWithoutGroupTest extends FirefoxTestBase {
 
     @Test
     public void testUIFirefox() {
@@ -41,16 +25,11 @@ public class FirefoxWithoutGroupTest {
             webDriver.navigate().to("https://www.facebook.com");
             Assert.assertNotEquals(webDriver.getTitle(), "Meta", "Title does not match");
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             Assert.fail();
         }
 
-    }
-    @AfterTest
-    public void tearDown() {
-        webDriver.quit();
     }
 
 }

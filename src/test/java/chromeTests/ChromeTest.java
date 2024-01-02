@@ -1,55 +1,26 @@
 package chromeTests;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.remote.SessionId;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import utils.ChromeTestBase;
 
-/**
- * @author jyoti.chabria
- */
-public class ChromeTest {
-    WebDriver webDriver;
-
-    @BeforeTest(alwaysRun = true)
-    public void setUp() throws MalformedURLException {
-        ChromeOptions options = new ChromeOptions();
-        options.setCapability("enableVNC",true);
-        options.setCapability("enableVideo",true);
-        webDriver=new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
-
-
-    }
+public class ChromeTest extends ChromeTestBase {
 
     @Test(groups = {"chrome"})
-    public void testOnlyChrome() {
-        try {
-            SessionId s = ((RemoteWebDriver) webDriver).getSessionId();
-            System.out.println("Session Id is: " + s);
-            webDriver.navigate().to("https://www.google.com");
-            Assert.assertEquals(webDriver.getTitle(), "Google", "Title does not match");
-            Thread.sleep(1000);
-            webDriver.navigate().to("https://www.youtube.com");
-            Assert.assertEquals(webDriver.getTitle(), "YouTube", "Title does not match");
-            Thread.sleep(1000);
-            webDriver.navigate().to("https://www.facebook.com");
-            Assert.assertNotEquals(webDriver.getTitle(), "Meta", "Title does not match");
+    public void testPageTitles() {
+        String[] urls = {"https://www.google.com", "https://www.youtube.com",
+            "https://www.facebook.com"};
+        String[] expectedTitles = {"Google", "YouTube", "Meta"};
 
+        for (int i = 0; i < urls.length; i++) {
+            webDriver.navigate().to(urls[i]);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            Assert.assertEquals(webDriver.getTitle(), expectedTitles[i],
+                "Title does not match for " + urls[i]);
         }
-        catch (Exception e) {
-            e.printStackTrace();
-            Assert.fail();
-        }
-
-    }
-    @AfterTest
-    public void tearDown() {
-        webDriver.quit();
     }
 }
