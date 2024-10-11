@@ -1,3 +1,4 @@
+**UPDATE - UPGRADED TO SELENIUM VERSION 4**
 # selenoid-example
 A maven testng code to run your selenium scripts on Selenoid (Docker based Selenium hub). 
 
